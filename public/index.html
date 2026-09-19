@@ -1,0 +1,902 @@
+<!-- නමෝ බුද්ධාය | 🤍 -->
+
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#f2f5fc">
+    <meta name="description" content="White Dreams™ Automator — a local-first, thoughtfully automated download workspace.">
+    <title>White Dreams™ | Automator · 3.0.0</title>
+    <link rel="icon" href="/brand.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./app.js" defer></script>
+</head>
+<body>
+
+<!-- ============ SVG ICON LIBRARY ============ -->
+<svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"
+     width="0" height="0" style="position:absolute;overflow:hidden">
+    <defs>
+        <symbol id="i-grid" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="7" rx="2"/>
+            <rect x="14" y="3" width="7" height="7" rx="2"/>
+            <rect x="3" y="14" width="7" height="7" rx="2"/>
+            <rect x="14" y="14" width="7" height="7" rx="2"/>
+        </symbol>
+        <symbol id="i-download" viewBox="0 0 24 24">
+            <path d="M12 3v12m-5-5 5 5 5-5M4 16v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/>
+        </symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24">
+            <path d="M12 5v14M5 12h14"/>
+        </symbol>
+        <symbol id="i-activity" viewBox="0 0 24 24">
+            <path d="M3 12h4l3-8 4 16 3-8h4"/>
+        </symbol>
+        <symbol id="i-settings" viewBox="0 0 24 24">
+            <path d="M4 7h16M4 17h16"/>
+            <circle cx="9" cy="7" r="3"/>
+            <circle cx="15" cy="17" r="3"/>
+        </symbol>
+        <symbol id="i-link" viewBox="0 0 24 24">
+            <path d="m10 13 4-4m-5 8-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m0 8a4 4 0 0 0 6 0l4-4a4 4 0 0 0-6-6l-1 1"/>
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+            <path d="M5 12h14m-5-5 5 5-5 5"/>
+        </symbol>
+        <symbol id="i-search" viewBox="0 0 24 24">
+            <circle cx="10.5" cy="10.5" r="6.5"/>
+            <path d="m16 16 5 5"/>
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+            <path d="m5 12 4 4L19 6"/>
+        </symbol>
+        <symbol id="i-alert" viewBox="0 0 24 24">
+            <path d="m12 3 10 18H2L12 3ZM12 9v4m0 3v1"/>
+        </symbol>
+        <symbol id="i-folder" viewBox="0 0 24 24">
+            <path d="M3 7V5h6l2 2h10v13H3V7Z"/>
+        </symbol>
+        <symbol id="i-file" viewBox="0 0 24 24">
+            <path d="M14 3H5v18h14V8l-5-5Zm0 0v6h5M8 13h8m-8 4h5"/>
+        </symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24">
+            <path d="M20 14A9 9 0 0 1 10 4a9 9 0 1 0 10 10Z"/>
+        </symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>
+        </symbol>
+        <symbol id="i-rows" viewBox="0 0 24 24">
+            <path d="M5 7h14M5 12h14M5 17h14"/>
+            <circle cx="3" cy="7" r=".5"/><circle cx="3" cy="12" r=".5"/><circle cx="3" cy="17" r=".5"/>
+        </symbol>
+        <symbol id="i-refresh" viewBox="0 0 24 24">
+            <path d="M20 8V3l-3 3a8 8 0 1 0 3 10M20 8h-5"/>
+        </symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24">
+            <path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/>
+            <path d="m8 12 3 3 5-6"/>
+        </symbol>
+        <symbol id="i-close" viewBox="0 0 24 24">
+            <path d="m6 6 12 12M6 18 18 6"/>
+        </symbol>
+        <symbol id="i-info" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 11v6"/>
+            <path d="M12 7.5h.01"/>
+        </symbol>
+    </defs>
+</svg>
+
+<div class="app">
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar">
+        <a class="brand" href="#" aria-label="White Dreams home">
+            <img src="brand.svg" alt="" width="44" height="44">
+            <span>White Dreams<sup>™</sup><small>THOUGHTFULLY AUTOMATED</small></span>
+        </a>
+
+        <div class="sidebar-label">WORKSPACE</div>
+
+        <nav aria-label="Main navigation">
+            <button type="button" class="nav active" id="navDownloads" aria-current="page">
+                <svg aria-hidden="true"><use href="#i-grid"/></svg>Downloads <span id="navCount">0</span>
+            </button>
+            <button type="button" class="nav" id="navActivity">
+                <svg aria-hidden="true"><use href="#i-activity"/></svg>Activity
+            </button>
+            <button type="button" class="nav" id="settingsBtn">
+                <svg aria-hidden="true"><use href="#i-settings"/></svg>Settings
+            </button>
+            <button type="button" class="nav" id="openAbout">
+                <svg aria-hidden="true"><use href="#i-info"/></svg>About
+            </button>
+        </nav>
+
+        <div class="sidebar-note">
+            <div class="note-icon"><svg aria-hidden="true"><use href="#i-shield"/></svg></div>
+            <strong>Quietly powerful.</strong>
+            <p>Your queue stays local and never starts without you.</p>
+            <button type="button" class="text-button" id="aboutBtn">What’s new in V3 <span>↗</span></button>
+        </div>
+
+        <div class="sidebar-bottom">
+            <span class="avatar">WD</span>
+            <div><strong>Crafted by SHAN</strong><small>Automator · v3.0.0</small></div>
+            <span class="small-spark">✦</span>
+        </div>
+    </aside>
+
+    <!-- ============ WORKSPACE ============ -->
+    <div class="workspace">
+        <header class="topbar">
+            <div class="breadcrumb"><span class="breadcrumb-mark"></span>Workspace <span>/</span> <strong>Downloads</strong></div>
+            <div class="top-actions">
+                <span id="connection" class="connection connecting"><i></i>Connecting</span>
+                <button type="button" class="button subtle small help-button" id="helpBtn"
+                        title="CloakBrowser setup and help" aria-label="Open setup help">
+                    <svg aria-hidden="true"><use href="#i-info"/></svg><span>Help</span>
+                </button>
+                <button type="button" class="icon-button" id="themeBtn" title="Toggle light / dark theme"
+                        aria-label="Toggle light or dark theme">
+                    <svg aria-hidden="true"><use href="#i-moon"/></svg>
+                </button>
+                <button type="button" class="button subtle small" id="openFolderBtn">
+                    <svg aria-hidden="true"><use href="#i-folder"/></svg>Open folder
+                </button>
+            </div>
+        </header>
+
+        <div id="connectionBanner" class="banner hidden" role="status">
+            Connection lost. Queue controls are locked while reconnecting.
+            <button type="button" id="reconnectBtn" class="text-button">Reconnect</button>
+        </div>
+
+        <div id="errorBanner" class="banner error-banner hidden" role="alert">
+            <span id="errorText"></span>
+            <button type="button" id="dismissError" class="icon-button" aria-label="Dismiss error">×</button>
+        </div>
+
+        <main>
+            <!-- Intro -->
+            <section class="intro">
+                <div class="intro-copy">
+                    <div class="eyebrow"><i></i> WHITE DREAMS™ / AUTOMATOR 3</div>
+                    <h1>Every download,<br><span>beautifully under control.</span></h1>
+                    <p>A focused local workspace for resolving links, managing large queues, and keeping every transfer clear.</p>
+                    <div class="intro-points" aria-label="Product qualities">
+                        <span><i></i> Local-first</span>
+                        <span><i></i> Recoverable queue</span>
+                        <span><i></i> Built for batches</span>
+                    </div>
+                </div>
+                <div class="intro-art" aria-hidden="true">
+                    <div class="dream-orbit orbit-one"></div>
+                    <div class="dream-orbit orbit-two"></div>
+                    <div class="dream-star star-one">✦</div>
+                    <div class="dream-star star-two">✦</div>
+                    <div class="intro-logo-shell"><img src="brand.svg" alt=""></div>
+                    <div class="release-badge"><span>✦</span><small>RE-INNOVATED</small><b>V3.0</b></div>
+                </div>
+            </section>
+
+            <!-- Source card -->
+            <section class="source-card panel" aria-label="Add a source page">
+                <div class="source-icon"><svg aria-hidden="true"><use href="#i-link"/></svg></div>
+
+                <form id="sourceForm">
+                    <label for="urlInput"><span>Resolve a collection page</span><small>SUPPORTED HOST WORKFLOW</small></label>
+                    <div class="source-row">
+                        <input id="urlInput" type="url" placeholder="Paste a supported file-page URL"
+                               autocomplete="off" spellcheck="false" required>
+                        <button class="button primary" id="loadBtn" type="submit">
+                            Find files <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </button>
+                        <button class="button subtle hidden" type="button" id="cancelExtractBtn">Cancel</button>
+                    </div>
+                </form>
+
+                <div class="source-divider"></div>
+
+                <button type="button" class="button subtle" id="importBtn">
+                    <svg aria-hidden="true"><use href="#i-plus"/></svg>Add direct links
+                </button>
+            </section>
+
+            <div class="source-note">
+                <svg aria-hidden="true"><use href="#i-shield"/></svg>
+                <span>Direct URLs work without CloakBrowser. Only supported file pages need a browser license.</span>
+            </div>
+
+            <!-- Stats -->
+            <section class="stats" aria-label="Queue statistics">
+                <div class="stat">
+                    <div class="stat-icon blue"><svg aria-hidden="true"><use href="#i-file"/></svg></div>
+                    <div><span>Total files</span><strong id="statTotal">0</strong></div>
+                    <small>IN YOUR WORKSPACE</small>
+                </div>
+                <div class="stat">
+                    <div class="stat-icon mint"><svg aria-hidden="true"><use href="#i-check"/></svg></div>
+                    <div><span>Completed</span><strong id="statDone">0</strong></div>
+                    <small>BUILT-IN DOWNLOADS</small>
+                </div>
+                <div class="stat">
+                    <div class="stat-icon amber"><svg aria-hidden="true"><use href="#i-alert"/></svg></div>
+                    <div><span>Needs attention</span><strong id="statAttention">0</strong></div>
+                    <small>FAILED OR INTERRUPTED</small>
+                </div>
+                <div class="stat">
+                    <div class="stat-icon lilac"><svg aria-hidden="true"><use href="#i-download"/></svg></div>
+                    <div><span>Received</span><strong class="bytes-stat" id="statBytes">0 B</strong></div>
+                    <small id="statSpeed">NO ACTIVE TRANSFER</small>
+                </div>
+            </section>
+
+            <!-- Content grid -->
+            <section class="content-grid">
+                <div class="queue-panel panel">
+                    <div class="section-header">
+                        <div>
+                            <h2>Your collection <span class="count" id="fileCount">0</span></h2>
+                            <p>One calm view for every file in the queue.</p>
+                        </div>
+                        <div class="inline-actions">
+                            <button type="button" class="button subtle small" id="exportBtn">
+                                <svg aria-hidden="true"><use href="#i-download"/></svg>Export
+                            </button>
+                            <button type="button" class="icon-button" id="compactBtn"
+                                    aria-label="Toggle compact rows" title="Compact rows">
+                                <svg aria-hidden="true"><use href="#i-rows"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="filter-row">
+                        <div class="tabs" id="filterTabs" role="group" aria-label="Filter files by status">
+                            <button type="button" data-filter="all" class="active" aria-pressed="true">All files</button>
+                            <button type="button" data-filter="pending" aria-pressed="false">Pending</button>
+                            <button type="button" data-filter="active" aria-pressed="false">Active</button>
+                            <button type="button" data-filter="completed" aria-pressed="false">Done</button>
+                            <button type="button" data-filter="attention" aria-pressed="false">Attention</button>
+                        </div>
+                        <label class="search-box">
+                            <svg aria-hidden="true"><use href="#i-search"/></svg>
+                            <input id="search" type="search" placeholder="Search files" aria-label="Search files">
+                        </label>
+                    </div>
+
+                    <div class="selection-bar">
+                        <label class="select-all"><input id="selectVisible" type="checkbox">Select filtered</label>
+                        <span id="selInfo">0 selected</span>
+                        <button type="button" class="text-button" id="selectNone">Clear selection</button>
+                        <button type="button" class="text-button danger-text" id="removeBtn" disabled>Remove</button>
+                        <select id="sortSelect" aria-label="Sort files">
+                            <option value="added">Added order</option>
+                            <option value="name">File name</option>
+                            <option value="status">Status</option>
+                        </select>
+                    </div>
+
+                    <div class="table-wrap" id="tableWrap">
+                        <table aria-label="File queue">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="check-col"><span class="sr-only">Select</span></th>
+                                <th scope="col">FILE NAME</th>
+                                <th scope="col" class="status-col">STATUS</th>
+                                <th scope="col" class="transfer-col">TRANSFER</th>
+                                <th scope="col" class="detail-col"><span class="sr-only">Details</span></th>
+                            </tr>
+                            </thead>
+                            <tbody id="fileRows"></tbody>
+                        </table>
+
+                        <div class="empty-state" id="emptyState">
+                            <div class="paper-stack">
+                                <svg aria-hidden="true"><use href="#i-file"/></svg><span>+</span>
+                            </div>
+                            <h3>A little space for something new.</h3>
+                            <p>Drop in a collection page or add direct links.<br>Your queue will stay right here, ready when you are.</p>
+                            <button type="button" class="button subtle small" id="emptyImportBtn">
+                                Add your first links <span>→</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-footer">
+                        <span id="pageInfo">No files yet</span>
+                        <div>
+                            <button type="button" class="icon-button" id="prevPage" aria-label="Previous page">‹</button>
+                            <span id="pageNumber">1 / 1</span>
+                            <button type="button" class="icon-button" id="nextPage" aria-label="Next page">›</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right rail -->
+                <aside class="right-rail">
+                    <section class="control-panel panel">
+                        <div class="section-header">
+                            <div><span class="eyebrow">QUEUE CONTROL</span><h2 id="queueTitle">Ready when you are</h2></div>
+                            <span class="live-dot" id="queueDot"></span>
+                        </div>
+                        <div class="queue-progress">
+                            <div><span id="queueCaption">Select files to get started</span><b id="progressText">0%</b></div>
+                            <div class="progress-track" id="overallProgress" role="progressbar"
+                                 aria-label="Queue items processed" aria-valuemin="0" aria-valuemax="100"
+                                 aria-valuenow="0"><i></i></div>
+                        </div>
+                        <button type="button" id="startBtn" class="button primary start-button" disabled>
+                            <svg aria-hidden="true"><use href="#i-download"/></svg><span>Start selected</span>
+                        </button>
+                        <div class="control-pair">
+                            <button type="button" id="pauseBtn" class="button subtle small" disabled>Pause after file</button>
+                            <button type="button" id="stopBtn" class="button danger small" disabled>Stop</button>
+                        </div>
+                        <button type="button" id="retryBtn" class="text-button retry-button" disabled>
+                            <svg aria-hidden="true"><use href="#i-refresh"/></svg>Retry failed / interrupted
+                        </button>
+                        <div class="engine-line"><span>Download engine</span><strong id="engineLabel">Built-in</strong></div>
+                        <p id="engineNote" class="fineprint">
+                            Actual transfer progress. Existing files are never overwritten.
+                        </p>
+                    </section>
+
+                    <section class="transfer-panel panel">
+                        <div class="eyebrow">LIVE TRANSFER</div>
+                        <div class="current-file">
+                            <div class="file-icon"><svg aria-hidden="true"><use href="#i-file"/></svg></div>
+                            <div>
+                                <strong id="currentFile">All is quiet.</strong>
+                                <span id="currentStatus">Your next download starts here.</span>
+                            </div>
+                        </div>
+                        <div class="mini-progress"><i id="fileProgress"></i></div>
+                        <div class="transfer-metrics">
+                            <div><span>SPEED</span><strong id="currentSpeed">—</strong></div>
+                            <div><span>REMAINING</span><strong id="currentEta">—</strong></div>
+                        </div>
+                    </section>
+
+                    <section class="activity-panel panel">
+                        <div class="section-header">
+                            <h2>Recent activity</h2>
+                            <button type="button" id="viewActivityBtn" class="text-button">View all ↗</button>
+                        </div>
+                        <div id="recentLog"></div>
+                    </section>
+                </aside>
+            </section>
+
+            <footer>
+                <span>
+                    <img src="brand.svg" alt="" width="17" height="17">
+                    WHITE DREAMS™ <span class="footer-dot">·</span> Thoughtfully automated in Sri Lanka.
+                </span>
+                <span>LOCAL-FIRST <i></i> AUTOMATOR 3.0.0</span>
+            </footer>
+        </main>
+    </div>
+</div>
+
+<!-- ============ IMPORT DIALOG ============ -->
+<dialog id="importDialog" class="dialog">
+    <form id="importForm">
+        <div class="dialog-header">
+            <div>
+                <span class="eyebrow">BUILD YOUR COLLECTION</span>
+                <h2>Add a few links. Or a few hundred.</h2>
+            </div>
+            <button type="button" class="icon-button" data-close="importDialog" aria-label="Close import">×</button>
+        </div>
+
+        <div class="dialog-body">
+            <label class="field">
+                <span>Link type</span>
+                <select id="importKind">
+                    <option value="direct">Direct file URLs — no browser license needed</option>
+                    <option value="page">Supported file-page URLs — resolves through the browser</option>
+                </select>
+            </label>
+
+            <label class="field">
+                <span>One URL per line · up to 2,000 files</span>
+                <textarea id="importText" rows="8"
+                          placeholder="https://example.com/file-one.zip&#10;https://example.com/file-two.zip"
+                          spellcheck="false"></textarea>
+            </label>
+
+            <div class="import-file-row">
+                <label class="button subtle small file-picker">
+                    Import .txt / .json
+                    <input id="importFile" type="file" accept=".txt,.json,text/plain,application/json">
+                </label>
+                <span id="importFileLabel">Duplicates are skipped automatically.</span>
+            </div>
+
+            <p class="fineprint">
+                JSON exports can include an optional SHA-256 checksum per file. Imported entries always
+                begin queued, never running.
+            </p>
+            <p class="inline-error hidden" id="importError" role="alert"></p>
+        </div>
+
+        <div class="dialog-footer">
+            <button type="button" class="button subtle" data-close="importDialog">Cancel</button>
+            <button class="button primary" id="importSave">
+                Add to collection <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+            </button>
+        </div>
+    </form>
+</dialog>
+
+<!-- ============ SETTINGS DIALOG ============ -->
+<dialog id="settingsDialog" class="dialog settings-dialog">
+    <form id="settingsForm">
+        <div class="dialog-header">
+            <div>
+                <span class="eyebrow">MAKE IT YOURS</span>
+                <h2>A workspace that works for you.</h2>
+            </div>
+            <button type="button" class="icon-button" data-close="settingsDialog" aria-label="Close settings">×</button>
+        </div>
+
+        <div class="dialog-body">
+            <div class="settings-grid">
+                <label class="field">
+                    <span>Download engine</span>
+                    <select id="engineInput">
+                        <option value="native">Built-in · verified completion</option>
+                        <option value="idm">IDM · hand-off or Take Over</option>
+                    </select>
+                </label>
+                <label class="field">
+                    <span>Appearance</span>
+                    <select id="themeInput">
+                        <option value="light">Cloud · Light</option>
+                        <option value="dark">Midnight · Dark</option>
+                        <option value="system">Follow the system</option>
+                    </select>
+                </label>
+            </div>
+
+            <label class="field">
+                <span>Download folder</span>
+                <div class="field-row">
+                    <input id="directoryInput" required spellcheck="false">
+                    <button type="button" id="browseDirectory" class="button subtle">Browse</button>
+                </div>
+            </label>
+
+            <label class="field">
+                <span>IDM executable (optional for built-in downloads)</span>
+                <div class="field-row">
+                    <input id="idmInput"
+                           placeholder="C:\Program Files (x86)\Internet Download Manager\IDMan.exe"
+                           spellcheck="false">
+                    <button type="button" id="browseIdm" class="button subtle">Browse</button>
+                </div>
+            </label>
+
+            <div class="settings-takeover" id="takeoverBlock" hidden>
+                <label class="checkbox-field takeover-field">
+                    <input id="idmTakeoverInput" type="checkbox">
+                    <span>
+            <strong>Allow WhiteDreams to take full control of IDM</strong>
+            <small>Closes any running IDM instance before each download and waits for completion.</small>
+        </span>
+                </label>
+
+                <div class="takeover-warning" id="takeoverWarning" hidden>
+                    <svg aria-hidden="true"><use href="#i-alert"/></svg>
+                    <div>
+                        <strong>Read before enabling</strong>
+                        <p>
+                            WhiteDreams will force-close <em>every</em> running IDM window before each job,
+                            then launch its own IDM instance and wait for it to finish.
+                            Do <strong>not</strong> enable this while IDM has downloads in progress or if you
+                            plan to start downloads manually in IDM. Closing IDM mid-download can corrupt
+                            its queue.
+                        </p>
+                    </div>
+                </div>
+
+                <label class="field takeover-timeout">
+                    <span>IDM completion timeout (minutes)</span>
+                    <input id="idmMaxWaitInput" type="number" min="1" max="1440" step="1">
+                </label>
+            </div>
+
+            <div class="settings-grid">
+                <label class="field">
+                    <span>Retries per file</span>
+                    <input id="retriesInput" type="number" min="0" max="5" required>
+                </label>
+                <label class="field">
+                    <span>Transfer timeout (minutes)</span>
+                    <input id="timeoutInput" type="number" min="1" max="1440" required>
+                </label>
+            </div>
+
+            <div class="settings-divider"></div>
+
+            <div class="license-heading">
+                <h3>Browser connection</h3>
+                <span id="licenseStatus" class="count">Not configured</span>
+            </div>
+
+            <label class="field">
+                <span>CloakBrowser license key</span>
+                <input id="licenseInput" type="password" autocomplete="off" spellcheck="false"
+                       placeholder="Leave blank to keep your existing key">
+            </label>
+
+            <label class="checkbox-field">
+                <input id="clearLicenseInput" type="checkbox">Remove the saved license
+            </label>
+
+            <p class="fineprint" id="licenseHelp">
+                Desktop keys use OS encryption. The browser provider may use your key for license validation.
+            </p>
+
+            <label class="field">
+                <span>Page link selector (advanced)</span>
+                <input id="selectorInput" spellcheck="false" required>
+            </label>
+
+            <p class="fineprint" id="configPath"></p>
+            <p class="inline-error hidden" id="settingsError" role="alert"></p>
+        </div>
+
+        <div class="dialog-footer">
+            <button type="button" class="button subtle" data-close="settingsDialog">Cancel</button>
+            <button id="settingsSave" class="button primary">
+                Save changes <svg aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+        </div>
+    </form>
+</dialog>
+
+<!-- ============ ACTIVITY DIALOG ============ -->
+<dialog id="activityDialog" class="dialog activity-dialog">
+    <div class="dialog-header">
+        <div>
+            <span class="eyebrow">THE FULL PICTURE</span>
+            <h2>Activity &amp; diagnostics</h2>
+        </div>
+        <button type="button" class="icon-button" data-close="activityDialog" aria-label="Close activity">×</button>
+    </div>
+
+    <div class="activity-tools">
+        <label>
+            <span class="sr-only">Filter activity</span>
+            <select id="logFilter">
+                <option value="all">All events</option>
+                <option value="error">Errors only</option>
+                <option value="warn">Warnings only</option>
+            </select>
+        </label>
+        <button type="button" id="diagnosticsBtn" class="button subtle small">Export diagnostics</button>
+        <button type="button" id="clearLogBtn" class="text-button">Clear view</button>
+    </div>
+
+    <div id="fullLog" class="full-log"></div>
+
+    <div class="dialog-footer">
+        <span class="fineprint">Last 500 events · URLs and secrets are redacted</span>
+        <button type="button" class="button subtle" data-close="activityDialog">Done</button>
+    </div>
+</dialog>
+
+<!-- ============ DETAIL DIALOG ============ -->
+<dialog id="detailDialog" class="dialog">
+    <div class="dialog-header">
+        <div>
+            <span class="eyebrow">FILE INSPECTOR</span>
+            <h2 id="detailTitle">File details</h2>
+        </div>
+        <button type="button" class="icon-button" data-close="detailDialog" aria-label="Close file details">×</button>
+    </div>
+
+    <dl id="detailBody" class="detail-body"></dl>
+
+    <div class="dialog-footer">
+        <button type="button" id="copyUrlBtn" class="button subtle">Copy source URL</button>
+        <button type="button" class="button primary" data-close="detailDialog">Done</button>
+    </div>
+</dialog>
+
+<!-- ============ CLOAKBROWSER SETUP / HELP DIALOG ============ -->
+<dialog id="helpDialog" class="dialog help-dialog" aria-labelledby="helpTitle">
+    <div class="dialog-header help-dialog-header">
+        <div class="help-heading">
+            <span class="help-mark"><svg aria-hidden="true"><use href="#i-shield"/></svg></span>
+            <div>
+                <span class="eyebrow">CLOAKBROWSER SETUP</span>
+                <h2 id="helpTitle">Connect CloakBrowser for file-page links.</h2>
+            </div>
+        </div>
+        <button type="button" class="icon-button" data-close="helpDialog" aria-label="Close help">×</button>
+    </div>
+
+    <div class="dialog-body help-dialog-body">
+        <section class="help-intro">
+            <div>
+                <span class="eyebrow">FREE LICENSE</span>
+                <h3>Get your CloakBrowser license key</h3>
+                <p>Sign in with GitHub. The license key is sent to the email address connected to your account.</p>
+            </div>
+            <p><strong><a class="help-plain-link" href="https://cloakbrowser.dev/free/"
+               target="_blank" rel="noopener noreferrer">cloakbrowser.dev/free/</a></strong></p>
+        </section>
+
+        <ol class="help-steps" aria-label="CloakBrowser setup steps">
+            <li>
+                <span>1</span>
+                <div><strong>Get your key</strong><p>Open the license page, sign in with GitHub, then check your email.</p></div>
+            </li>
+            <li>
+                <span>2</span>
+                <div><strong>Open Browser connection</strong><p>Go to <b>Settings</b> → <b>Browser connection</b> → <b>CloakBrowser license key</b>.</p></div>
+            </li>
+            <li>
+                <span>3</span>
+                <div><strong>Paste and save</strong><p>Paste the key and choose <b>Save changes</b>. If saving fails once, retry; if it continues, contact the developer.</p></div>
+            </li>
+        </ol>
+
+        <aside class="help-warning">
+            <svg aria-hidden="true"><use href="#i-alert"/></svg>
+            <div>
+                <strong>Set up the key before resolving a file page</strong>
+                <p>Direct file URLs do not need CloakBrowser. The key is required only for supported page-resolution workflows.</p>
+                <p><strong>First-use note:</strong> CloakBrowser may download its Chromium runtime automatically. This happens once and can use roughly 500 MB or more.</p>
+            </div>
+        </aside>
+
+        <section class="help-intro">
+            <div>
+                <span class="eyebrow">ESSENTIAL</span>
+                <h3>Optional IDM integration</h3>
+                <p>Use IDM if you prefer its transfer manager. Automator’s built-in engine remains available without it.</p>
+            </div>
+            <p><strong><a class="help-plain-link" href="https://www.internetdownloadmanager.com/"
+                          target="_blank" rel="noopener noreferrer">internetdownloadmanager.com</a></strong></p>
+        </section>
+
+        <section class="help-community">
+            <div>
+                <span class="help-community-icon">✦</span>
+                <div>
+                    <strong>Help Automator grow</strong>
+                    <p>White Dreams™ Automator is free to use. Every clear bug report helps make the next release better.</p>
+                </div>
+            </div>
+            <p>If you would like to contribute or need support, contact<br>
+                <a href="mailto:shavishan.official@gmail.com">shavishan.official@gmail.com</a>
+            </p>
+        </section>
+    </div>
+
+    <div class="dialog-footer help-footer">
+        <span class="fineprint">You can reopen this guide anytime using Help.</span>
+        <button type="button" id="helpOpenSettings" class="button subtle">
+            <svg aria-hidden="true"><use href="#i-settings"/></svg>Open settings
+        </button>
+        <button type="button" id="helpDone" class="button primary" data-close="helpDialog">
+            I understand <svg aria-hidden="true"><use href="#i-check"/></svg>
+        </button>
+    </div>
+</dialog>
+
+<!-- ============ ABOUT DIALOG (short) ============ -->
+<dialog id="aboutDialog" class="dialog">
+    <div class="dialog-header">
+        <div class="about-header-brand">
+            <img src="brand.svg" alt="White Dreams logo" width="50" height="50">
+            <div>
+                <span class="eyebrow">CRAFTED BY SHAN</span>
+                <h2>White Dreams™ | Automator</h2>
+            </div>
+        </div>
+        <button type="button" class="icon-button" data-close="aboutDialog" aria-label="Close about">×</button>
+    </div>
+
+    <div class="dialog-body">
+        <span class="version-chip">VERSION 3.0.0</span>
+        <h3>A fresh chapter for your downloads.</h3>
+        <p class="about-copy">
+            A recoverable queue, built-in transfers, safer settings, and room for thousands of files.
+            Thoughtful little details, from first link to last byte.
+        </p>
+        <p class="about-copy">
+            Version 3 introduces a completely redesigned experience,
+            stronger error handling, improved task management, live
+            progress tracking and safer recovery from interrupted
+            operations.
+        </p>
+        <div class="about-features">
+            <span>↻ Automatic transient-error retries</span>
+            <span>◈ Optional SHA-256 verification</span>
+            <span>⌘ Ctrl+K · Search &nbsp; Ctrl+L · Add links</span>
+            <span>◐ Cloud &amp; Midnight themes</span>
+        </div>
+        <p class="fineprint">
+            Pause waits between files. Retry restarts a file from the beginning. IDM hand-offs are
+            unverified unless full control is enabled. Only download content you’re authorized to access.
+        </p>
+        <p id="updateMessage" class="fineprint"></p>
+    </div>
+
+    <div class="dialog-footer">
+        <button type="button" id="checkUpdatesBtn" class="button subtle">Check for updates</button>
+        <button type="button" class="button primary" data-close="aboutDialog">Back to workspace</button>
+    </div>
+</dialog>
+
+<!-- ============ ABOUT DIALOG (full) ============ -->
+<dialog id="aboutwdDialog" class="dialog about-dialog">
+    <div class="dialog-header">
+        <div>
+            <span class="eyebrow">WHITE DREAMS™</span>
+            <h2>Automation, reimagined.</h2>
+        </div>
+        <button type="button" class="icon-button" data-close="aboutwdDialog" aria-label="Close About">×</button>
+    </div>
+
+    <div class="dialog-body about-body">
+        <section class="about-product">
+            <div class="about-logo-shell">
+                <img src="./assets/Images/White-Dreams-Automator-Logo.svg"
+                     alt="White Dreams Automator logo"
+                     class="about-logo">
+            </div>
+
+            <div class="about-product-details">
+                <span class="about-product-brand">White Dreams™</span>
+
+                <h1 class="about-product-title">
+                    <span>Automator</span>
+                    <span class="about-title-meta">
+                    <img src="./assets/Images/LK.png"
+                         alt="Sri Lankan flag"
+                         class="flag">
+                    <span class="white-heart" aria-hidden="true">🤍</span>
+                </span>
+                </h1>
+
+                <div class="about-release">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <span>Version 3.0.0</span>
+                    <span class="release-separator" aria-hidden="true">•</span>
+                    <span>Re-innovated</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-introduction">
+            <p>
+                White Dreams™ Automator is a modern desktop automation
+                workspace created to simplify repetitive download workflows
+                and make large file operations easier to control.
+            </p>
+        </section>
+
+        <section class="about-information">
+            <div class="about-information-row contact-heading">
+                <strong>Contact | Report | support | contribute</strong>
+            </div>
+            <div class="about-information-row contact-row">
+                <span>Email</span>
+                <strong><a href="mailto:shavishan.official@gmail.com">shavishan.official@gmail.com</a></strong>
+            </div>
+            <div class="about-information-row contact-row">
+                <span>GitHub</span>
+                <strong><a href="https://www.github.com/s-shavishan" target="_blank" rel="noopener noreferrer">github.com/s-shavishan</a></strong>
+            </div>
+            <div class="about-information-row contact-row">
+                <span>Discord</span>
+                <strong><a href="https://discord.gg/n5c2fBwg" target="_blank" rel="noopener noreferrer">discord.gg/n5c2fBwg</a></strong>
+            </div>
+        </section>
+
+        <section class="about-feature-grid">
+            <article class="about-feature">
+                <div class="about-feature-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg>
+                </div>
+                <div>
+                    <h3>Reliable</h3>
+                    <p>Robust validation, retries and error recovery.</p>
+                </div>
+            </article>
+
+            <article class="about-feature">
+                <div class="about-feature-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M13 2 4.5 13h7L11 22l8.5-12h-7L13 2Z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3>Efficient</h3>
+                    <p>Built to manage both individual and large batch jobs.</p>
+                </div>
+            </article>
+
+            <article class="about-feature">
+                <div class="about-feature-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 3v3"/>
+                        <path d="M12 18v3"/>
+                        <path d="m4.22 4.22 2.12 2.12"/>
+                        <path d="m17.66 17.66 2.12 2.12"/>
+                        <path d="M3 12h3"/>
+                        <path d="M18 12h3"/>
+                        <path d="m4.22 19.78 2.12-2.12"/>
+                        <path d="m17.66 6.34 2.12-2.12"/>
+                        <circle cx="12" cy="12" r="4"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3>Adaptable</h3>
+                    <p>Choose the workflow and download engine you prefer.</p>
+                </div>
+            </article>
+        </section>
+
+        <section class="about-information">
+            <div class="about-information-row">
+                <span>Application</span>
+                <strong>White Dreams™ Automator</strong>
+            </div>
+            <div class="about-information-row">
+                <span>Version</span>
+                <strong>3.0.0</strong>
+            </div>
+            <div class="about-information-row">
+                <span>Edition</span>
+                <strong>Re-innovated</strong>
+            </div>
+            <div class="about-information-row">
+                <span>Developer</span>
+                <strong>Shan</strong>
+            </div>
+            <div class="about-information-row">
+                <span>Platform</span>
+                <strong>Desktop · Electron</strong>
+            </div>
+        </section>
+
+        <div class="about-signature">
+            <span class="signature-mark">WD</span>
+            <div>
+                <p>Thoughtfully designed and developed by Shan.</p>
+                <small>© 2026 White Dreams™. All rights reserved.</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="dialog-footer about-footer">
+        <span class="about-ready">
+            <span class="status-dot"></span>
+            Automator is ready
+        </span>
+    </div>
+</dialog>
+
+<!-- ============ CONFIRM DIALOG ============ -->
+<dialog id="confirmDialog" class="dialog confirm-dialog">
+    <div class="dialog-header"><h2 id="confirmTitle">Confirm action</h2></div>
+    <div class="dialog-body"><p id="confirmMessage"></p></div>
+    <div class="dialog-footer">
+        <button type="button" id="confirmCancel" class="button subtle">Cancel</button>
+        <button type="button" id="confirmAccept" class="button danger">Confirm</button>
+    </div>
+</dialog>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<noscript>This application needs JavaScript. Enable it and reload.</noscript>
+</body>
+</html>

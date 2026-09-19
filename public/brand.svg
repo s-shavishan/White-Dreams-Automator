@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1254" height="1254" viewBox="0 0 1254 1254" role="img" aria-labelledby="title desc">
+  <title id="title">White Dreams Automator logo</title>
+  <desc id="desc">A luminous silver crescent surrounding a cloud, automation gear, circuit paths, stars, and a WD monogram.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1d2938"/><stop offset=".55" stop-color="#0c1624"/><stop offset="1" stop-color="#172538"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#eef7ff" stop-opacity=".62"/><stop offset=".16" stop-color="#7590ad" stop-opacity=".2"/><stop offset=".78" stop-color="#152132" stop-opacity=".08"/><stop offset="1" stop-color="#a9c4df" stop-opacity=".4"/></linearGradient>
+    <linearGradient id="silver" x1=".15" y1=".05" x2=".82" y2=".93"><stop stop-color="#fff"/><stop offset=".35" stop-color="#e8eef6"/><stop offset=".67" stop-color="#aebdd0"/><stop offset=".86" stop-color="#fff"/><stop offset="1" stop-color="#91abc7"/></linearGradient>
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".42" stop-color="#dfe8f4"/><stop offset="1" stop-color="#899bb1"/></linearGradient>
+    <radialGradient id="orb"><stop stop-color="#fff"/><stop offset=".35" stop-color="#d7edff"/><stop offset=".7" stop-color="#70baff"/><stop offset="1" stop-color="#2d6eaf"/></radialGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000b18" flood-opacity=".8"/></filter>
+    <mask id="crescent"><rect width="1254" height="1254" fill="black"/><circle cx="616" cy="579" r="446" fill="white"/><circle cx="747" cy="482" r="384" fill="black"/></mask>
+  </defs>
+
+  <rect width="1254" height="1254" fill="#0b121c"/>
+  <rect x="74" y="64" width="1106" height="1084" rx="210" fill="#7dc2ff" opacity=".32" filter="url(#glow)"/>
+  <rect x="77" y="67" width="1100" height="1078" rx="207" fill="url(#bg)" stroke="#eff8ff" stroke-width="10"/>
+  <rect x="91" y="81" width="1072" height="1050" rx="192" fill="url(#glass)" stroke="#99b9d8" stroke-width="4"/>
+  <path d="M194 169C270 91 387 89 568 89h350c98 0 164 21 214 78-91-39-174-44-298-44H390c-86 0-144 15-196 46z" fill="#fff" opacity=".3"/>
+
+  <g filter="url(#soft)">
+    <circle cx="616" cy="579" r="446" fill="url(#silver)" mask="url(#crescent)" stroke="#a9dcff" stroke-width="8"/>
+    <circle cx="616" cy="579" r="452" fill="none" mask="url(#crescent)" stroke="#71c3ff" stroke-width="14" opacity=".58" filter="url(#glow)"/>
+  </g>
+
+  <g fill="url(#cloud)" stroke="#d6e9fb" stroke-width="5" filter="url(#soft)">
+    <circle cx="542" cy="507" r="69"/><circle cx="618" cy="436" r="91"/><circle cx="709" cy="402" r="98"/><circle cx="789" cy="472" r="83"/><circle cx="858" cy="552" r="86"/><circle cx="474" cy="563" r="71"/>
+    <path d="M472 511h381c63 0 113 51 113 113s-50 113-113 113H486c-70 0-127-56-127-126 0-55 36-99 86-117z"/>
+  </g>
+
+  <g transform="translate(650 571)" filter="url(#soft)">
+    <path d="M-25-154h50l9 45a116 116 0 0 1 32 13l38-25 35 35-25 38a116 116 0 0 1 13 32l45 9v50l-45 9a116 116 0 0 1-13 32l25 38-35 35-38-25a116 116 0 0 1-32 13l-9 45h-50l-9-45a116 116 0 0 1-32-13l-38 25-35-35 25-38a116 116 0 0 1-13-32l-45-9v-50l45-9a116 116 0 0 1 13-32l-25-38 35-35 38 25a116 116 0 0 1 32-13z" fill="url(#silver)" stroke="#dcecff" stroke-width="6"/>
+    <circle r="82" fill="#25354a" stroke="#9fb2c7" stroke-width="10"/><circle r="55" fill="#152538" stroke="#657e99" stroke-width="8"/><circle r="37" fill="url(#orb)" stroke="#e5f6ff" stroke-width="4" filter="url(#glow)"/>
+  </g>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+    <path d="M778 554h83l86-84" stroke="#233a55" stroke-width="30"/><path d="M778 554h83l86-84" stroke="#dfeeff" stroke-width="14"/>
+    <path d="M778 590h174l58-47" stroke="#233a55" stroke-width="30"/><path d="M778 590h174l58-47" stroke="#dfeeff" stroke-width="14"/>
+    <path d="M772 628h54l48 34h34" stroke="#233a55" stroke-width="30"/><path d="M772 628h54l48 34h34" stroke="#dfeeff" stroke-width="14"/>
+    <g fill="url(#orb)" stroke="#f3fbff" stroke-width="8"><circle cx="966" cy="460" r="18"/><circle cx="1040" cy="539" r="18"/><circle cx="928" cy="661" r="18"/></g>
+  </g>
+
+  <g fill="#fff" stroke="#bce5ff" stroke-width="3" filter="url(#glow)">
+    <path d="M845 190l10 47 39 11-39 10-10 48-10-48-40-10 40-11z"/><path d="M941 289l7 31 26 7-26 7-7 31-7-31-26-7 26-7z"/><path d="M780 774l8 35 29 8-29 8-8 35-8-35-29-8 29-8z"/>
+  </g>
+
+  <g fill="none" stroke="url(#silver)" stroke-width="34" stroke-linejoin="miter" filter="url(#soft)">
+    <path d="M503 737l86 131 50-81 52 81 92-132"/>
+    <path d="M716 736h72c73 0 111 53 111 105s-38 103-111 103h-62"/>
+  </g>
+  <rect x="77" y="67" width="1100" height="1078" rx="207" fill="none" stroke="#8ed1ff" stroke-width="7" opacity=".42" filter="url(#glow)"/>
+</svg>
